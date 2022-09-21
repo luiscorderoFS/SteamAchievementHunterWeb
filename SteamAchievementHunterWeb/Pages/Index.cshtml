@@ -1,0 +1,29 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome @SteamAchievementHunterWeb.Program.playerSummaryData.Nickname</h1>
+    <p>Try playing @SteamAchievementHunterWeb.Program.oneGame</p>
+    @* A table that is populated with the games collection from Program.cs which is async so it doesn't load the page until the 
+        information is all there *@
+    <table class ="table table-bordered">
+        <thead>
+            <tr>
+                <th>AppId</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in SteamAchievementHunterWeb.Program.games)//(IEnumerable<Steam.Models.SteamCommunity.OwnedGameModel>)ViewData["Games"])
+            {
+            <tr>
+                <td>@game.AppId</td>
+                <td>@game.Name</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
