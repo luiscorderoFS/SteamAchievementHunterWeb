@@ -21,8 +21,9 @@ namespace SteamAchievementHunterWeb
         public static PlayerSummaryModel playerSummaryData;
         public static List<OwnedGameModel> games;
         public static List<PlayerAchievementModel> achievementList;
+        public static List<PlayerAchievementModel> incompleteAchList = new List<PlayerAchievementModel>();
         public static string oneGame;
-
+        public static Random randy = new Random();
         public static async Task Main(string[] args)
         {
             
@@ -55,6 +56,14 @@ namespace SteamAchievementHunterWeb
             {
                 var playerAchievementResponse = await steamUserStatInterface.GetPlayerAchievementsAsync(ownedGame.AppId, steamId);
                 achievementList = (List<PlayerAchievementModel>)playerAchievementResponse.Data.Achievements;
+                if (achievementList != null)
+                {
+                    foreach (var item in achievementList)
+                    {
+                        if (item.Achieved == 0) incompleteAchList.Add(item);
+                        
+                    } 
+                }
             }
             catch(HttpRequestException e)
             {
@@ -76,8 +85,12 @@ namespace SteamAchievementHunterWeb
 
         public static OwnedGameModel getRandomGame()
         {
-            Random randy = new Random();
-            return games[randy.Next(games.Count)];
+           return games[randy.Next(games.Count)];
+        }
+
+        public static string getRandomAchievement()
+        {
+            return incompleteAchList[randy.Next(incompleteAchList.Count)].Name;
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
