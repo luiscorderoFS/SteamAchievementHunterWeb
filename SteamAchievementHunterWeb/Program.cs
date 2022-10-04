@@ -104,7 +104,7 @@ namespace SteamAchievementHunterWeb
 
         public static string getRandomAchievement()
         {
-            return incompleteAchList[randy.Next(incompleteAchList.Count)-1].name;
+            return incompleteAchList[randy.Next(incompleteAchList.Count)].name;
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
