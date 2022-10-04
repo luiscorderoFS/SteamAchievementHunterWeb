@@ -6,12 +6,13 @@
 
 
 <div class="text-center">
+    <img src ="@SteamAchievementHunterWeb.Program.playerSummaryData.AvatarFullUrl" alt="@SteamAchievementHunterWeb.Program.playerSummaryData.Nickname"/>
     <h1 class="display-4">Welcome @SteamAchievementHunterWeb.Program.playerSummaryData.Nickname</h1>
     <p>Try playing @SteamAchievementHunterWeb.Program.oneGame</p>
     <p>and try beating @SteamAchievementHunterWeb.Program.getRandomAchievement()</p>
     @* A table that is populated with the games collection from Program.cs which is async so it doesn't load the page until the
         information is all there *@
-    <table class="table table-bordered" style="float: left; width: 50%">
+    @*<table class="table table-bordered" style="float: left; width: 50%">
         <thead>
             <tr>
                 <th>AppId</th>
@@ -27,34 +28,25 @@
                 </tr>
             }
         </tbody>
-    </table>
+    </table>*@
     @* Achievement Table 
        The outer if check allows the table to be drawn if the game has an achievement list, if there isn't it will not draw at all
     *@
     @if (SteamAchievementHunterWeb.Program.achievementList != null)
     {
-        <table class ="table table-bordered" style="float: right; width: 50%">
+        <table class ="table table-bordered" style="float: right" >
         <thead>
             <tr>
                 <th>Incomplete Achievements from @SteamAchievementHunterWeb.Program.oneGame (@SteamAchievementHunterWeb.Program.incompleteAchList.Count)</th>
-                @*<th>Completed?(Y/N)</th>*@
+                <th>Percentage</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var achievement in SteamAchievementHunterWeb.Program.incompleteAchList)
             {
                 <tr>
-                    <td>@achievement.Name</td>
-                    @*<td>
-                        @if (achievement.Achieved == 1)
-                        {
-                            <p>Y</p>
-                        }
-                        else
-                        {
-                            <p>N</p>
-                        }
-                    </td>*@
+                    <td>@achievement.name</td>
+                    <td>@achievement.percentage%</td>
                 </tr>
             }
         </tbody>

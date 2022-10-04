@@ -21,7 +21,9 @@ namespace SteamAchievementHunterWeb
         public static PlayerSummaryModel playerSummaryData;
         public static List<OwnedGameModel> games;
         public static List<PlayerAchievementModel> achievementList;
-        public static List<PlayerAchievementModel> incompleteAchList = new List<PlayerAchievementModel>();
+        public static List<GlobalAchievementPercentageModel> percentList = new List<GlobalAchievementPercentageModel>();
+        public static List<IncompletePercentage> incompleteAchList = new List<IncompletePercentage>();
+
         public static string oneGame;
         public static Random randy = new Random();
         public static async Task Main(string[] args)
@@ -40,7 +42,7 @@ namespace SteamAchievementHunterWeb
             // this will map to ISteamUser/GetPlayerSummaries method in the Steam Web API
             var playerSummaryResponse = await steamInterface.GetPlayerSummaryAsync(steamId);
             playerSummaryData = playerSummaryResponse.Data;
-
+            
             // this will map to the IPlayerService endpoint that allows me to view a user's library
             var steamPlayerInterface = webInterfaceFactory.CreateSteamWebInterface<PlayerService>();
             var ownedGames = await steamPlayerInterface.GetOwnedGamesAsync(steamId, includeAppInfo: true);
@@ -54,16 +56,28 @@ namespace SteamAchievementHunterWeb
             var steamUserStatInterface = webInterfaceFactory.CreateSteamWebInterface<SteamUserStats>(new HttpClient());
             try 
             {
+                //this gets the achievement list of the user both achieved and not 
                 var playerAchievementResponse = await steamUserStatInterface.GetPlayerAchievementsAsync(ownedGame.AppId, steamId);
                 achievementList = (List<PlayerAchievementModel>)playerAchievementResponse.Data.Achievements;
+                //this gets the achievement list and the percentage of people that completed it
+                var globalAchievementResponse = await steamUserStatInterface.GetGlobalAchievementPercentagesForAppAsync(ownedGame.AppId);
+                percentList = (List<GlobalAchievementPercentageModel>)globalAchievementResponse.Data;
+
+                //sorts by the name that steam uses to catergorize the achievement names
+                achievementList.Sort((a, b) => (a.APIName.CompareTo(b.APIName)));
+                percentList.Sort((a, b) => (a.Name.CompareTo(b.Name)));
                 if (achievementList != null)
                 {
-                    foreach (var item in achievementList)
+                    for (int i = 0; i < achievementList.Count; i++)
                     {
-                        if (item.Achieved == 0) incompleteAchList.Add(item);
-                        
-                    } 
+                        if(achievementList[i].Achieved == 0)
+                        {
+                            incompleteAchList.Add(new IncompletePercentage(percentList[i],achievementList[i]));
+                        }
+                    }
+                    incompleteAchList.Sort((a, b) => b.percentage.CompareTo(a.percentage));
                 }
+                
             }
             catch(HttpRequestException e)
             {
@@ -90,7 +104,7 @@ namespace SteamAchievementHunterWeb
 
         public static string getRandomAchievement()
         {
-            return incompleteAchList[randy.Next(incompleteAchList.Count)].Name;
+            return incompleteAchList[randy.Next(incompleteAchList.Count)-1].name;
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
