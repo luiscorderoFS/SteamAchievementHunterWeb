@@ -7,6 +7,7 @@ using SteamWebAPI2.Interfaces;
 using System.Net.Http;
 using Steam.Models.SteamCommunity;
 using Steam.Models.SteamPlayer;
+using Steam.Models;
 
 
 namespace SteamAchievementHunterWeb
@@ -15,12 +16,14 @@ namespace SteamAchievementHunterWeb
     {
         public double percentage;
         public string name;
+        public string image;
 
-        public IncompletePercentage(GlobalAchievementPercentageModel gap, PlayerAchievementModel pam)
+        public IncompletePercentage(GlobalAchievementPercentageModel gap, PlayerAchievementModel pam, SchemaGameAchievementModel sgam)
         {
             percentage = gap.Percent;
             percentage = Math.Round(percentage,2);
             name = pam.Name;
+            image = sgam.Icon;
         }
     }
 }

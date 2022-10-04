@@ -25,7 +25,11 @@ namespace SteamAchievementHunterWeb.Pages
 
         public void OnGet()
         {
+            IncompletePercentage placeHolder = Program.getRandomAchievement();
+            ViewData["AchName"] = placeHolder.name;
+            ViewData["AchImage"] = placeHolder.image;
+
         }
-        
+
     }
 }

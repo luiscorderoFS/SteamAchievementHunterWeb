@@ -9,7 +9,8 @@
     <img src ="@SteamAchievementHunterWeb.Program.playerSummaryData.AvatarFullUrl" alt="@SteamAchievementHunterWeb.Program.playerSummaryData.Nickname"/>
     <h1 class="display-4">Welcome @SteamAchievementHunterWeb.Program.playerSummaryData.Nickname</h1>
     <p>Try playing @SteamAchievementHunterWeb.Program.oneGame</p>
-    <p>and try beating @SteamAchievementHunterWeb.Program.getRandomAchievement()</p>
+    <img src="@ViewData["AchImage"]" alt="Alternate Text" />
+    <p>and try beating @ViewData["AchName"]</p>
     @* A table that is populated with the games collection from Program.cs which is async so it doesn't load the page until the
         information is all there *@
     @*<table class="table table-bordered" style="float: left; width: 50%">
@@ -37,6 +38,7 @@
         <table class ="table table-bordered" style="float: right" >
         <thead>
             <tr>
+                <th>Icon</th>
                 <th>Incomplete Achievements from @SteamAchievementHunterWeb.Program.oneGame (@SteamAchievementHunterWeb.Program.incompleteAchList.Count)</th>
                 <th>Percentage</th>
             </tr>
@@ -45,6 +47,7 @@
             @foreach (var achievement in SteamAchievementHunterWeb.Program.incompleteAchList)
             {
                 <tr>
+                    <td><img src= @achievement.image alt="Alternate Text" /></td>
                     <td>@achievement.name</td>
                     <td>@achievement.percentage%</td>
                 </tr>
