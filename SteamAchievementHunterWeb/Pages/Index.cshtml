@@ -11,28 +11,6 @@
     <p>Try playing @SteamAchievementHunterWeb.Program.oneGame</p>
     <img src="@ViewData["AchImage"]" alt="Alternate Text" />
     <p>and try beating @ViewData["AchName"]</p>
-    @* A table that is populated with the games collection from Program.cs which is async so it doesn't load the page until the
-        information is all there *@
-    @*<table class="table table-bordered" style="float: left; width: 50%">
-        <thead>
-            <tr>
-                <th>AppId</th>
-                <th>Library(@SteamAchievementHunterWeb.Program.games.Count)</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var game in SteamAchievementHunterWeb.Program.games)
-            {
-                <tr>
-                    <td>@game.AppId</td>
-                    <td>@game.Name</td>
-                </tr>
-            }
-        </tbody>
-    </table>*@
-    @* Achievement Table 
-       The outer if check allows the table to be drawn if the game has an achievement list, if there isn't it will not draw at all
-    *@
     @if (SteamAchievementHunterWeb.Program.achievementList != null)
     {
         <table class ="table table-bordered" style="float: right" >

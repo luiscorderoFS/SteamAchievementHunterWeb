@@ -1,0 +1,11 @@
+﻿@page
+@model SteamAchievementHunterWeb.Pages.Forms.AddSteamIdModel
+@{
+    ViewData["Title"] = "Add Steam ID";
+}
+
+<h1>Add Steam ID</h1>
+<form method="post">
+    <input type="text" asp-for="steamID.userID" placeholder="Steam ID"/>
+    <button type="submit">Submit</button>
+</form>
