@@ -18,5 +18,11 @@ namespace SteamAchievementHunterWeb.Pages.Forms
             temp = new steamUserWithID(steamID);
         }
 
+
+        public void RerollAchievement()
+        {
+            temp.randomAchievement();
+            Page();
+        }
     }
 }

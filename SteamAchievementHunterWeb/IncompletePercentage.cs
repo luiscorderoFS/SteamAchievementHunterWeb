@@ -17,13 +17,14 @@ namespace SteamAchievementHunterWeb
         public double percentage;
         public string name;
         public string image;
-
+        public string desc;
         public IncompletePercentage(GlobalAchievementPercentageModel gap, PlayerAchievementModel pam, SchemaGameAchievementModel sgam)
         {
             percentage = gap.Percent;
             percentage = Math.Round(percentage,2);
             name = pam.Name;
             image = sgam.Icon;
+            desc = sgam.Description;
         }
     }
 }

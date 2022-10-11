@@ -18,27 +18,37 @@
     <p>Try playing @Model.temp.randomOwnedGame.Name</p>
     <img src="@Model.temp.placeholder.image" alt="Alternate Text" />
     <p>and try beating @Model.temp.placeholder.name</p>
-    @if (SteamAchievementHunterWeb.Program.achievementList != null)
+    <p>@Model.temp.placeholder.desc</p>
+    <p>Completion Rate: @Model.temp.placeholder.percentage%</p>
+    <button type="button" onclick="document.location.reload(true)">Reroll Game</button>
+    <button type="button">Reroll Achievement</button>
+    <style>
+        body {
+            background-image: url(@Model.temp.randomOwnedGame.ImgIconUrl);
+            background-color: #cccccc;
+        }
+    </style>
+    @if (@Model.temp.achievementList != null)
     {
-    <table class="table table-bordered" style="float: right">
-        <thead>
-            <tr>
-                <th>Icon</th>
-                <th>Incomplete Achievements from @Model.temp.randomOwnedGame.Name (@Model.temp.incompleteAchList.Count)</th>
-                <th>Percentage</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var achievement in @Model.temp.incompleteAchList)
-            {
-            <tr>
-                <td><img src=@achievement.image alt="Alternate Text" /></td>
-                <td>@achievement.name</td>
-                <td>@achievement.percentage%</td>
-            </tr>
-            }
-        </tbody>
-    </table>
+        <table class="table table-bordered" style="float: right">
+            <thead>
+                <tr>
+                    <th>Icon</th>
+                    <th>Incomplete Achievements from @Model.temp.randomOwnedGame.Name (@Model.temp.incompleteAchList.Count)</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var achievement in @Model.temp.incompleteAchList)
+                {
+                    <tr>
+                        <td><img src=@achievement.image alt="Alternate Text" /></td>
+                        <td>@achievement.name</td>
+                        <td>@achievement.percentage%</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
 </div>
 
