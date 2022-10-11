@@ -1,37 +1,44 @@
-﻿@page 
+﻿@page
+
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
 
-<div class="text-center">
-    <img src ="@SteamAchievementHunterWeb.Program.playerSummaryData.AvatarFullUrl" alt="@SteamAchievementHunterWeb.Program.playerSummaryData.Nickname"/>
-    <h1 class="display-4">Welcome @SteamAchievementHunterWeb.Program.playerSummaryData.Nickname</h1>
-    <p>Try playing @SteamAchievementHunterWeb.Program.oneGame</p>
-    <img src="@ViewData["AchImage"]" alt="Alternate Text" />
-    <p>and try beating @ViewData["AchName"]</p>
-    @if (SteamAchievementHunterWeb.Program.achievementList != null)
-    {
-        <table class ="table table-bordered" style="float: right" >
-        <thead>
-            <tr>
-                <th>Icon</th>
-                <th>Incomplete Achievements from @SteamAchievementHunterWeb.Program.oneGame (@SteamAchievementHunterWeb.Program.incompleteAchList.Count)</th>
-                <th>Percentage</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var achievement in SteamAchievementHunterWeb.Program.incompleteAchList)
-            {
+<h1>Enter Steam ID</h1>
+<form method="post">
+    <input type="text" asp-for="steamID.userID" placeholder="Steam ID" />
+    <button type="submit">Submit</button>
+</form>
+
+@*<div class="text-center">
+        <img src ="@SteamAchievementHunterWeb.Program.playerSummaryData.AvatarFullUrl" alt="@SteamAchievementHunterWeb.Program.playerSummaryData.Nickname"/>
+        <h1 class="display-4">Welcome @SteamAchievementHunterWeb.Program.playerSummaryData.Nickname</h1>
+        <p>Try playing @SteamAchievementHunterWeb.Program.oneGame</p>
+        <img src="@ViewData["AchImage"]" alt="Alternate Text" />
+        <p>and try beating @ViewData["AchName"]</p>
+        @if (SteamAchievementHunterWeb.Program.achievementList != null)
+        {
+            <table class ="table table-bordered" style="float: right" >
+            <thead>
                 <tr>
-                    <td><img src= @achievement.image alt="Alternate Text" /></td>
-                    <td>@achievement.name</td>
-                    <td>@achievement.percentage%</td>
+                    <th>Icon</th>
+                    <th>Incomplete Achievements from @SteamAchievementHunterWeb.Program.oneGame (@SteamAchievementHunterWeb.Program.incompleteAchList.Count)</th>
+                    <th>Percentage</th>
                 </tr>
-            }
-        </tbody>
-        </table>
-    }
-</div>
+            </thead>
+            <tbody>
+                @foreach (var achievement in SteamAchievementHunterWeb.Program.incompleteAchList)
+                {
+                    <tr>
+                        <td><img src= @achievement.image alt="Alternate Text" /></td>
+                        <td>@achievement.name</td>
+                        <td>@achievement.percentage%</td>
+                    </tr>
+                }
+            </tbody>
+            </table>
+        }
+    </div>*@
 

@@ -1,0 +1,44 @@
+﻿@page
+@model SteamAchievementHunterWeb.Pages.Forms.SteamUserAcheivement
+@{
+    ViewData["Title"] = "Steam Achievement Hunter";
+    await Model.temp.initAsync();
+
+}
+
+
+@*<div class="text-center">
+    <h1 class="display-4"> Welcome @Model.temp.playerSummaryData.Nickname</h1>
+</div>*@
+
+
+<div class="text-center">
+    <img src="@Model.temp.playerSummaryData.AvatarFullUrl" alt="@Model.temp.playerSummaryData.Nickname" />
+    <h1 class="display-4">Welcome @Model.temp.playerSummaryData.Nickname</h1>
+    <p>Try playing @Model.temp.randomOwnedGame.Name</p>
+    <img src="@Model.temp.placeholder.image" alt="Alternate Text" />
+    <p>and try beating @Model.temp.placeholder.name</p>
+    @if (SteamAchievementHunterWeb.Program.achievementList != null)
+    {
+    <table class="table table-bordered" style="float: right">
+        <thead>
+            <tr>
+                <th>Icon</th>
+                <th>Incomplete Achievements from @Model.temp.randomOwnedGame.Name (@Model.temp.incompleteAchList.Count)</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var achievement in @Model.temp.incompleteAchList)
+            {
+            <tr>
+                <td><img src=@achievement.image alt="Alternate Text" /></td>
+                <td>@achievement.name</td>
+                <td>@achievement.percentage%</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+</div>
+

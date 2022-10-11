@@ -10,7 +10,7 @@ using SteamWebAPI2.Utilities;
 using SteamWebAPI2.Interfaces;
 using System.Net.Http;
 using Steam.Models.SteamCommunity;
-
+using SteamAchievementHunterWeb.Models;
 
 namespace SteamAchievementHunterWeb.Pages
 {
@@ -23,12 +23,24 @@ namespace SteamAchievementHunterWeb.Pages
             _logger = logger;
         }
 
+        [BindProperty]
+        public SteamIDModel steamID { get; set; }
+
         public void OnGet()
         {
-            IncompletePercentage placeHolder = Program.passOn;
-            ViewData["AchName"] = placeHolder.name;
-            ViewData["AchImage"] = placeHolder.image;
+            //IncompletePercentage placeHolder = Program.passOn;
+            //ViewData["AchName"] = placeHolder.name;
+            //ViewData["AchImage"] = placeHolder.image;
 
+        }
+
+        public IActionResult OnPost()
+        {
+            if (ModelState.IsValid == false)
+            {
+                return Page();
+            }
+            return RedirectToPage("/Forms/SteamUserAchievement", new { steamID = steamID.userID });
         }
 
     }

@@ -34,6 +34,7 @@ namespace SteamAchievementHunterWeb
         public List<GlobalAchievementPercentageModel> percentList { get; private set; }
         public List<SchemaGameAchievementModel> imageList { get; private set; }
         public List<IncompletePercentage> incompleteAchList { get; set; }
+        public IncompletePercentage placeholder { get; set; }
         public steamUserWithID(ulong id)
         {
             webInterfaceFactory = new SteamWebInterfaceFactory("AE4AFAB67BEBF82BAF22E19DC4BB53E6");
@@ -83,7 +84,7 @@ namespace SteamAchievementHunterWeb
                 }
                 incompleteAchList.Sort((a, b) => b.percentage.CompareTo(a.percentage));
             }
-
+            placeholder = randomAchievement();
         }
 
         public void removeAchievementlessGames()

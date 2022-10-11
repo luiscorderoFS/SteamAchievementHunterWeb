@@ -30,21 +30,21 @@ namespace SteamAchievementHunterWeb
         public static Random randy = new Random();
         public static async Task Main(string[] args)
         {
-            ulong nate = 76561198018711540; //nate
-            ulong fernando = 76561198097815532; //Fernando
-            ulong juan = 76561199024005983; //Juan
-            ulong luis = 76561198054594019; //Luis; 
-            ulong mad = 76561198083577140; //Mad
-            steamUserWithID temp = new steamUserWithID(luis);
-            await temp.initAsync();
-            playerSummaryData = temp.playerSummaryData;
-            games = temp.games;
-            achievementList = temp.achievementList;
-            percentList = temp.percentList;
-            incompleteAchList = temp.incompleteAchList;
-            imageList = temp.imageList;
-            passOn = temp.randomAchievement();
-            oneGame = temp.randomOwnedGame.Name;
+            //ulong nate = 76561198018711540; //nate
+            //ulong fernando = 76561198097815532; //Fernando
+            //ulong juan = 76561199024005983; //Juan
+            //ulong luis = 76561198054594019; //Luis; 
+            //ulong mad = 76561198083577140; //Mad
+            //steamUserWithID temp = new steamUserWithID(luis);
+            //await temp.initAsync();
+            //playerSummaryData = temp.playerSummaryData;
+            //games = temp.games;
+            //achievementList = temp.achievementList;
+            //percentList = temp.percentList;
+            //incompleteAchList = temp.incompleteAchList;
+            //imageList = temp.imageList;
+            //passOn = temp.randomAchievement();
+            //oneGame = temp.randomOwnedGame.Name;
             #region oldCode
             //// factory to be used to generate various web interfaces
             //var webInterfaceFactory = new SteamWebInterfaceFactory("AE4AFAB67BEBF82BAF22E19DC4BB53E6");
