@@ -22,6 +22,8 @@
     <p>Completion Rate: @Model.temp.placeholder.percentage%</p>
     <button type="button" onclick="document.location.reload(true)">Reroll Game</button>
     <button type="button">Reroll Achievement</button>
+    <button type="button" onclick="window.open('steam://run/@Model.temp.randomOwnedGame.AppId','_newtab')">Launch</button>
+
     <style>
         body {
             background-image: url(@Model.temp.randomOwnedGame.ImgIconUrl);
