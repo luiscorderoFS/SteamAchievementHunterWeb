@@ -45,7 +45,7 @@ namespace SteamAchievementHunterWeb
             this.id = id;
         }
 
-        public async Task initAsync()
+        public async Task initAsync(uint appID = 0)
         {
             var tempPlayerResponse = await steamInterface.GetPlayerSummaryAsync(this.id);
             playerSummaryData = tempPlayerResponse.Data;
@@ -55,14 +55,20 @@ namespace SteamAchievementHunterWeb
             games = (List<OwnedGameModel>)ownedGames.Data.OwnedGames;
             games.Sort((a, b) => (a.Name[0].CompareTo(b.Name[0])));
             removeAchievementlessGames();
-            await randomGame();
+            await randomGame(appID);
         }
 
 
-        public async Task randomGame()
+        public async Task randomGame(uint appID = 0)
         {
             randomOwnedGame = games[randy.Next(games.Count)];
             var playerAchievementResponse = await steamUserStatInterface.GetPlayerAchievementsAsync(randomOwnedGame.AppId, id);
+
+            if(appID != 0)
+            {
+                randomOwnedGame = games.Find(x => x.AppId == appID);
+                playerAchievementResponse = await steamUserStatInterface.GetPlayerAchievementsAsync(randomOwnedGame.AppId, id);
+            }
             achievementList = (List<PlayerAchievementModel>)playerAchievementResponse.Data.Achievements;
             //this gets the achievement list and the percentage of people that completed it
             var globalAchievementResponse = await steamUserStatInterface.GetGlobalAchievementPercentagesForAppAsync(randomOwnedGame.AppId);
@@ -86,6 +92,15 @@ namespace SteamAchievementHunterWeb
             }
             placeholder = randomAchievement();
         }
+
+
+        //public OwnedGameModel findGameWithAppID(int appID)
+        //{
+        //    for (int i = 0; i < games.Count; i++)
+        //    {
+        //        if (games[i].AppId == appID) return games[i];
+        //    }
+        //}
 
         public void removeAchievementlessGames()
         {

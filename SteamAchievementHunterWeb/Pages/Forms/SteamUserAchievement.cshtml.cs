@@ -12,17 +12,31 @@ namespace SteamAchievementHunterWeb.Pages.Forms
     {
         [BindProperty(SupportsGet =true)]
         public ulong steamID { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public uint appID { get; set; }
+        public string appURL { get; set; }
         public steamUserWithID temp;
         public void OnGet()
         {
             temp = new steamUserWithID(steamID);
+            
         }
 
-
-        public void RerollAchievement()
+        public IActionResult ButtonClick()
         {
-            temp.randomAchievement();
-            Page();
+            return Page();
+        }
+        public IActionResult check(string button)
+        {
+            if (!string.IsNullOrEmpty(button))
+            {
+                TempData["ButtonValue"] = string.Format("{0} button clicked.", button);
+            }
+            else
+            {
+                TempData["ButtonValue"] = "No button click!";
+            }
+            return RedirectToAction("ButtonClick");
         }
     }
 }
