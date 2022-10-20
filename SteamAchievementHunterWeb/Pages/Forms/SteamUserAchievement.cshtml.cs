@@ -15,6 +15,7 @@ namespace SteamAchievementHunterWeb.Pages.Forms
         [BindProperty(SupportsGet = true)]
         public uint appID { get; set; }
         public string appURL { get; set; }
+        public string googleSearch { get; set; }
         public steamUserWithID temp;
         public void OnGet()
         {

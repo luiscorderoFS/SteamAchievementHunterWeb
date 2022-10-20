@@ -94,14 +94,13 @@ namespace SteamAchievementHunterWeb
         }
 
 
-        //public OwnedGameModel findGameWithAppID(int appID)
-        //{
-        //    for (int i = 0; i < games.Count; i++)
-        //    {
-        //        if (games[i].AppId == appID) return games[i];
-        //    }
-        //}
+        public string googlifyAchievement()
+        {
+            string googleString = randomOwnedGame.Name.ToString() + "+" + placeholder.name.ToString();
 
+            googleString = googleString.Replace(' ', '+');
+            return googleString;
+        }
         public void removeAchievementlessGames()
         {
             for (int i = 0; i < games.Count; i++)

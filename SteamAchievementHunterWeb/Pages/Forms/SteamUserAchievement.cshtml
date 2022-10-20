@@ -5,6 +5,8 @@
     await Model.temp.initAsync(Model.appID);
     Model.appID = Model.temp.randomOwnedGame.AppId;
     Model.appURL = "https://steamcdn-a.akamaihd.net/steam/apps/" + @Model.temp.randomOwnedGame.AppId + "/header.jpg";
+    Model.googleSearch = "https://www.google.com/search?q=" + Model.temp.googlifyAchievement() + "+guide";
+    
 
 
 }
@@ -16,26 +18,28 @@
 
 
 <div class="text-center">
-    <img src="@Model.temp.playerSummaryData.AvatarFullUrl" alt="@Model.temp.playerSummaryData.Nickname" style="border:5px solid black"  />
+    <img src="@Model.temp.playerSummaryData.AvatarFullUrl" alt="@Model.temp.playerSummaryData.Nickname" style="border:5px solid black" />
     <h1 class="display-4"><mark style="border:5px solid black">Welcome @Model.temp.playerSummaryData.Nickname</mark></h1>
-    
+
     <p><br /><mark style="border:5px solid black"> Try playing @Model.temp.randomOwnedGame.Name </mark></p>
     <img src="@Model.temp.placeholder.image" alt="Alternate Text" style="border:5px solid black" />
     <p>
         <mark>
-             and try beating <b>@Model.temp.placeholder.name </b> <br />
-             @Model.temp.placeholder.desc  <br />
-             Completion Rate: <b>@Model.temp.placeholder.percentage% </b> <br />
+            and try beating <b>@Model.temp.placeholder.name </b> <br />
+            @Model.temp.placeholder.desc  <br />
+            Completion Rate: <b>@Model.temp.placeholder.percentage% </b> <br />
         </mark>
     </p>
     <button type="button" onclick="document.location.reload(true)">Reroll Game</button>
+    <button type="button" onclick="window.open('@Model.googleSearch', '_newtab')">Guide</button>
     <button type="button" onclick="window.open('steam://run/@Model.temp.randomOwnedGame.AppId','_newtab')">Launch</button>
 
 
 
     <style>
         body {
-            background-image: url( @Model.appURL );
+            @*background-image: url( @Model.appURL );*@
+            background-image: linear-gradient(to bottom, rgba(255,255,255,0) 20%, rgba(255,255,255,1)), url(@Model.appURL);
             background-repeat: no-repeat;
             background-position: top 58px;
             background-size: 100%;
@@ -44,31 +48,31 @@
     </style>
     @if (@Model.temp.achievementList != null)
     {
-    <table class="table table-bordered" style="background-color:#cccccc ;float : right ">
-        <thead>
-            <tr>
-                <th>Icon</th>
-                <th>Incomplete Achievements from @Model.temp.randomOwnedGame.Name (@Model.temp.incompleteAchList.Count)</th>
-                <th>Percentage</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var achievement in @Model.temp.incompleteAchList)
+        <table class="table table-bordered" style="background-color:#cccccc ;float : right ">
+            <thead>
+                <tr>
+                    <th>Icon</th>
+                    <th>Incomplete Achievements from @Model.temp.randomOwnedGame.Name (@Model.temp.incompleteAchList.Count)</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var achievement in @Model.temp.incompleteAchList)
                 {
-            <tr>
-                <td><img src=@achievement.image alt="Alternate Text" /></td>
-                <td>
-                    <b>@achievement.name </b>
-                    <p>
-                        @achievement.desc
+                    <tr>
+                        <td><img src=@achievement.image alt="Alternate Text" /></td>
+                        <td>
+                            <b>@achievement.name </b>
+                            <p>
+                                @achievement.desc
 
-                    </p>
-                </td>
-                <td>@achievement.percentage%</td>
-            </tr>
+                            </p>
+                        </td>
+                        <td>@achievement.percentage%</td>
+                    </tr>
                 }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     }
 </div>
 

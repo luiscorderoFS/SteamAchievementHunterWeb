@@ -19,16 +19,16 @@ namespace SteamAchievementHunterWeb
     public class Program
     {
         //Global Variables used to pass info the Razor Page
-        public static PlayerSummaryModel playerSummaryData;
-        public static List<OwnedGameModel> games;
-        public static List<PlayerAchievementModel> achievementList;
-        public static List<GlobalAchievementPercentageModel> percentList = new List<GlobalAchievementPercentageModel>();
-        public static List<IncompletePercentage> incompleteAchList = new List<IncompletePercentage>();
-        public static List<SchemaGameAchievementModel> imageList = new List<SchemaGameAchievementModel>();
-        public static string oneGame;
-        public static IncompletePercentage passOn;
-        public static Random randy = new Random();
-        public static async Task Main(string[] args)
+        //public static PlayerSummaryModel playerSummaryData;
+        //public static List<OwnedGameModel> games;
+        //public static List<PlayerAchievementModel> achievementList;
+        //public static List<GlobalAchievementPercentageModel> percentList = new List<GlobalAchievementPercentageModel>();
+        //public static List<IncompletePercentage> incompleteAchList = new List<IncompletePercentage>();
+        //public static List<SchemaGameAchievementModel> imageList = new List<SchemaGameAchievementModel>();
+        //public static string oneGame;
+        //public static IncompletePercentage passOn;
+        //public static Random randy = new Random();
+        public static void Main(string[] args)
         {
             //ulong nate = 76561198018711540; //nate
             //ulong fernando = 76561198097815532; //Fernando
@@ -112,16 +112,17 @@ namespace SteamAchievementHunterWeb
 
 
 
-        public static OwnedGameModel getRandomGame()
-        {
-           return games[randy.Next(games.Count)];
-        }
+        //public static OwnedGameModel getRandomGame()
+        //{
+        //   return games[randy.Next(games.Count)];
+        //}
 
-        public static IncompletePercentage getRandomAchievement()
-        {
+        //public static IncompletePercentage getRandomAchievement()
+        //{
            
-            return incompleteAchList[randy.Next(incompleteAchList.Count)];
-        }
+        //    return incompleteAchList[randy.Next(incompleteAchList.Count)];
+        //}
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
