@@ -22,22 +22,5 @@ namespace SteamAchievementHunterWeb.Pages.Forms
             temp = new steamUserWithID(steamID);
             
         }
-
-        public IActionResult ButtonClick()
-        {
-            return Page();
-        }
-        public IActionResult check(string button)
-        {
-            if (!string.IsNullOrEmpty(button))
-            {
-                TempData["ButtonValue"] = string.Format("{0} button clicked.", button);
-            }
-            else
-            {
-                TempData["ButtonValue"] = "No button click!";
-            }
-            return RedirectToAction("ButtonClick");
-        }
     }
 }
